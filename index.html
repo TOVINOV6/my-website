@@ -3,107 +3,179 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Website</title>
+<title>Dev Bot Hacker</title>
 
 <style>
 body {
   margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #141e30, #243b55);
-  color: white;
+  font-family: 'Courier New', monospace;
+  color: #00ff00;
+}
+
+/* VIDEO BACKGROUND */
+video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+
+/* OVERLAY */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  z-index: -1;
+}
+
+/* NAVBAR */
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 30px;
+  background: rgba(0,0,0,0.8);
+  box-shadow: 0 0 10px #00ff00;
+}
+
+nav a {
+  color: #00ff00;
+  text-decoration: none;
+  margin-left: 20px;
+}
+
+/* HERO */
+.hero {
   text-align: center;
+  padding: 100px 20px;
 }
 
-/* Profile */
-.profile {
-  margin-top: 60px;
+.hero h1 {
+  font-size: 40px;
 }
 
-.profile img {
-  width: 130px;
-  height: 130px;
-  border-radius: 50%;
-  border: 4px solid white;
-  box-shadow: 0 0 20px rgba(255,255,255,0.3);
+.hero span {
+  color: #00ffcc;
 }
 
-/* Title */
-h1 {
-  margin: 15px 0 5px;
-  font-size: 28px;
-}
-
-p {
-  opacity: 0.8;
-}
-
-/* Button */
 .btn {
   display: inline-block;
   margin-top: 20px;
   padding: 12px 25px;
-  border-radius: 25px;
-  background: linear-gradient(45deg, #ff416c, #ff4b2b);
-  color: white;
+  background: #00ff00;
+  color: black;
   text-decoration: none;
   font-weight: bold;
-  transition: 0.3s;
 }
 
-.btn:hover {
-  transform: scale(1.1);
-}
-
-/* Cards */
-.container {
-  margin-top: 50px;
-  padding: 20px;
+/* SECTION */
+.section {
+  padding: 50px 20px;
+  text-align: center;
 }
 
 .card {
-  background: rgba(255,255,255,0.1);
+  background: rgba(0,0,0,0.8);
   margin: 15px;
   padding: 20px;
-  border-radius: 15px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  border-radius: 10px;
+  display: inline-block;
+  width: 250px;
+  box-shadow: 0 0 10px #00ff00;
+  transition: 0.3s;
 }
 
 .card:hover {
   transform: scale(1.05);
-  transition: 0.3s;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: rgba(0,0,0,0.8);
 }
 </style>
 </head>
 
 <body>
 
-<div class="profile">
-  <img src="https://telegra.ph/file/fcf186dbbdbb069c55b36-156f66a09aeb33dd3b.jpg">
-  <h1>🔥 My Website 🔥</h1>
-  <p>Welcome to my world 😎</p>
+<!-- VIDEO -->
+<video autoplay muted loop>
+  <source src="https://cdn.coverr.co/videos/coverr-matrix-code-5176/1080p.mp4" type="video/mp4">
+</video>
 
-  <a href="https://t.me/+btTxImFRNpBjOGY1" class="btn">Join Telegram 🚀</a>
+<div class="overlay"></div>
+
+<!-- NAVBAR -->
+<nav>
+  <h2>⚡ DevBot</h2>
+  <div>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#bots">Bots</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>Hi, I'm <span>Telegram Bot Developer</span> 🤖</h1>
+  <p>I build fast & powerful Telegram bots ⚡</p>
+  <a href="https://t.me/XAVIER_Tgx" class="btn">Join Telegram 🚀</a>
 </div>
 
-<div class="container">
-
-  <div class="card">
-    <h2>🎬 Movies</h2>
-    <p>Latest Movies Available</p>
-  </div>
-
-  <div class="card">
-    <h2>📺 Series</h2>
-    <p>Trending Web Series</p>
-  </div>
-
-  <div class="card">
-    <h2>📥 Downloads</h2>
-    <p>Fast Download Links</p>
-  </div>
-
+<!-- ABOUT -->
+<div id="about" class="section">
+  <h2>👨‍💻 About Me</h2>
+  <p>I create autofilter bots, file store bots and advanced Telegram systems.</p>
 </div>
+
+<!-- SKILLS -->
+<div id="skills" class="section">
+  <h2>🚀 Skills</h2>
+
+  <div class="card">Python 🐍</div>
+  <div class="card">Telegram API 🤖</div>
+  <div class="card">MongoDB 🍃</div>
+  <div class="card">Cloud Hosting ☁️</div>
+</div>
+
+<!-- BOTS -->
+<div id="bots" class="section">
+  <h2>🔥 My Bots</h2>
+
+  <div class="card">
+    <h3>Auto Filter Bot</h3>
+    <p>Fast file search ⚡</p>
+  </div>
+
+  <div class="card">
+    <h3>File Store Bot</h3>
+    <p>Unlimited storage 📁</p>
+  </div>
+
+  <div class="card">
+    <h3>Force Sub Bot</h3>
+    <p>Channel growth 🚀</p>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div id="contact" class="section">
+  <h2>📞 Contact</h2>
+  <p>Telegram: @XAVIER_Tgx</p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 DevBot Hacker</p>
+</footer>
 
 </body>
 </html>
