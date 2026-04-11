@@ -1,190 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dev Bot Hacker</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XAVIER_Tgx | Aflah Work's</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background-color: #0d0d0d; color: #fff; }
+        header { padding: 20px; background: #1a1a1a; text-align: center; position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid #00d2d3; }
+        header h1 { font-size: 24px; margin: 0; color: #00d2d3; }
+        
+        /* Coder Box Style */
+        .coder-box {
+            text-align: center;
+            padding: 15px;
+            background: #1a1a1a;
+            border-bottom: 1px solid #333;
+        }
+        .coder-link {
+            text-decoration: none;
+            color: #00d2d3;
+            font-weight: bold;
+            font-size: 0.9em;
+            padding: 8px 16px;
+            border: 1px solid #00d2d3;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .coder-link:hover { background: #00d2d3; color: #000; }
 
-<style>
-body {
-  margin: 0;
-  font-family: 'Courier New', monospace;
-  color: #00ff00;
-}
+        .hero { 
+            height: 90vh; display: flex; justify-content: center; align-items: center; text-align: center; 
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); 
+            background-size: cover; background-position: center; 
+        }
+        
+        .hero h1 { font-size: 3.5rem; margin: 0; color: #fff; text-transform: uppercase; letter-spacing: 2px; }
+        .hero p { font-size: 1.2rem; color: #00d2d3; margin-top: 10px; font-weight: 500; }
+        
+        .section { padding: 50px 20px; text-align: center; }
+        .cards { display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; margin-top: 40px; }
+        
+        .card { 
+            width: 320px; padding: 3px; border-radius: 20px; text-decoration: none; 
+            color: #fff; display: block; position: relative;
+            background: conic-gradient(from var(--angle), #1e3c72, #00d2d3, #1e3c72);
+            transition: 0.3s;
+        }
+        
+        .card-inner {
+            background: #0d0d0d;
+            padding: 30px;
+            border-radius: 18px;
+            height: 100%;
+        }
 
-/* VIDEO BACKGROUND */
-video {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -2;
-  filter: brightness(40%);
-}
+        @property --angle {
+            syntax: "<angle>";
+            initial-value: 0deg;
+            inherits: false;
+        }
 
-/* OVERLAY */
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.4);
-  z-index: -1;
-}
+        @keyframes rotate {
+            0% { --angle: 0deg; }
+            100% { --angle: 360deg; }
+        }
 
-/* NAVBAR */
-nav {
-  display: flex;
-  justify-content: space-between;
-  padding: 15px 30px;
-  background: rgba(0,0,0,0.8);
-  box-shadow: 0 0 10px #00ff00;
-}
-
-nav a {
-  color: #00ff00;
-  text-decoration: none;
-  margin-left: 20px;
-}
-
-/* HERO */
-.hero {
-  text-align: center;
-  padding: 100px 20px;
-}
-
-.hero h1 {
-  font-size: 40px;
-  text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
-}
-
-.hero span {
-  color: #00ffcc;
-}
-
-/* BUTTON */
-.btn {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 12px 25px;
-  background: #00ff00;
-  color: black;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.btn:hover {
-  background: black;
-  color: #00ff00;
-  border: 1px solid #00ff00;
-}
-
-/* SECTION */
-.section {
-  padding: 50px 20px;
-  text-align: center;
-}
-
-.card {
-  background: rgba(0,0,0,0.8);
-  margin: 15px;
-  padding: 20px;
-  border-radius: 10px;
-  display: inline-block;
-  width: 250px;
-  box-shadow: 0 0 10px #00ff00;
-  transition: 0.3s;
-}
-
-.card:hover {
-  transform: scale(1.05);
-}
-
-/* FOOTER */
-footer {
-  text-align: center;
-  padding: 20px;
-  background: rgba(0,0,0,0.8);
-}
-</style>
+        .card { animation: rotate 3s linear infinite; }
+        .card:hover { transform: translateY(-10px); }
+        
+        button { padding: 15px 30px; background: #00d2d3; border: none; border-radius: 5px; cursor: pointer; color: black; font-weight: bold; margin-top: 20px; transition: 0.3s; }
+        button:hover { background: #fff; }
+        
+        .paid-tag { font-weight: bold; display: block; margin-top: 15px; background: rgba(0,210,211,0.2); padding: 5px 10px; border-radius: 4px; display: inline-block; font-size: 0.85em; color: #00d2d3; }
+    </style>
 </head>
-
 <body>
 
-<!-- VIDEO (FIXED) -->
-<video autoplay muted loop playsinline>
-  <source src="https://cdn.pixabay.com/vimeo/328940142/matrix-23311.mp4" type="video/mp4">
-</video>
+<header>
+    <h1>Aflah Work's</h1>
+</header>
 
-<div class="overlay"></div>
-
-<!-- NAVBAR -->
-<nav>
-  <h2>⚡ DevBot</h2>
-  <div>
-    <a href="#about">About</a>
-    <a href="#skills">Skills</a>
-    <a href="#bots">Bots</a>
-    <a href="#contact">Contact</a>
-  </div>
-</nav>
-
-<!-- HERO -->
-<div class="hero">
-  <h1>Hi, I'm <span>Telegram Bot Developer</span> 🤖</h1>
-  <p>I build fast & powerful Telegram bots ⚡</p>
-  <a href="https://t.me/XAVIER_Tgx" class="btn">Join Telegram 🚀</a>
+<div class="coder-box">
+    <a href="https://t.me/Tg_Profassor" class="coder-link">Special Thanks: Coder (Tg_Profassor)</a>
 </div>
 
-<!-- ABOUT -->
-<div id="about" class="section">
-  <h2>👨‍💻 About Me</h2>
-  <p>I create autofilter bots, file store bots and advanced Telegram systems.</p>
-</div>
+<section class="hero">
+    <div>
+        <h1>Welcome To My Digital World</h1>
+        <p>Innovation · Precision · Excellence</p>
+        <button onclick="scrollToSection()">Explore My Work</button>
+    </div>
+</section>
 
-<!-- SKILLS -->
-<div id="skills" class="section">
-  <h2>🚀 Skills</h2>
+<section class="section" id="work">
+    <h2>My Work's</h2>
+    <div class="cards">
+        <a href="https://t.me/XAVIER_Tgx" class="card">
+            <div class="card-inner">
+                <h3>Bot Maker</h3>
+                <p>Custom Telegram bot development for your needs.</p>
+                <span class="paid-tag">(Paid Work)</span>
+            </div>
+        </a>
 
-  <div class="card">Python 🐍</div>
-  <div class="card">Telegram API 🤖</div>
-  <div class="card">MongoDB 🍃</div>
-  <div class="card">Cloud Hosting ☁️</div>
-</div>
 
-<!-- BOTS -->
-<div id="bots" class="section">
-  <h2>🔥 My Bots</h2>
+<a href="https://t.me/XAVIER_Tgx" class="card">
+            <div class="card-inner">
+                <h3>Website Development</h3>
+                <p>Professional web application development.</p>
+                <span class="paid-tag">(Paid Work)</span>
+            </div>
+        </a>
 
-  <div class="card">
-    <h3>Auto Filter Bot</h3>
-    <p>Fast file search ⚡</p>
-  </div>
+        <a href="https://t.me/XAVIER_Tgx" class="card">
+            <div class="card-inner">
+                <h3>Website Design</h3>
+                <p>Creative and modern designs.</p>
+                <span class="paid-tag">(Paid Work)</span>
+            </div>
+        </a>
+    </div>
+</section>
 
-  <div class="card">
-    <h3>File Store Bot</h3>
-    <p>Unlimited storage 📁</p>
-  </div>
-
-  <div class="card">
-    <h3>Force Sub Bot</h3>
-    <p>Channel growth 🚀</p>
-  </div>
-</div>
-
-<!-- CONTACT -->
-<div id="contact" class="section">
-  <h2>📞 Contact</h2>
-  <p>Telegram: @XAVIER_Tgx</p>
-</div>
-
-<!-- FOOTER -->
-<footer>
-  <p>© 2026 DevBot Hacker</p>
-</footer>
+<script>
+    function scrollToSection() {
+        document.getElementById('work').scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
 
 </body>
 </html>
