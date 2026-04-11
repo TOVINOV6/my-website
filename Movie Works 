@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinema Company</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: #050505; color: #fff; font-family: 'Segoe UI', sans-serif; }
+        
+        header { padding: 30px 20px; text-align: center; border-bottom: 1px solid #333; }
+        header h1 { color: #f5c518; letter-spacing: 3px; text-transform: uppercase; }
+        .dev-tag { font-size: 11px; color: #888; margin-top: 5px; text-transform: uppercase; }
+
+        /* Premium Search Box */
+        .search-container { text-align: center; margin: 30px 20px; }
+        input { 
+            padding: 15px 25px; 
+            width: 80%; 
+            max-width: 500px; 
+            border-radius: 50px; 
+            border: 2px solid #333; 
+            background: #121212; 
+            color: white; 
+            outline: none; 
+            font-size: 16px;
+            transition: 0.4s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        input:focus { 
+            border-color: #f5c518; 
+            box-shadow: 0 0 15px rgba(245, 197, 24, 0.3);
+            width: 85%;
+        }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 20px; padding: 20px; max-width: 1200px; margin: auto; }
+        .card { background: #121212; border-radius: 8px; overflow: hidden; cursor: pointer; transition: 0.3s; border: 1px solid #222; }
+        .card:hover { transform: scale(1.05); border-color: #f5c518; }
+        .card img { width: 100%; height: 240px; object-fit: cover; }
+        .card-info { padding: 10px; font-size: 14px; text-align: center; }
+
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 1000; overflow-y: auto; }
+        .modal-content { max-width: 600px; margin: 40px auto; padding: 20px; }
+        .close-btn { font-size: 30px; cursor: pointer; color: #f5c518; float: right; }
+        
+        .modal-poster { width: 100%; border-radius: 10px; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
+        .info-box { margin-top: 20px; }
+        .info-box h2 { font-size: 28px; margin-bottom: 10px; }
+        .rating { color: #f5c518; font-weight: bold; font-size: 18px; margin: 10px 0; }
+        .details p { margin: 8px 0; line-height: 1.5; color: #ccc; }
+        .btn-trailer { background: #f5c518; color: black; padding: 12px; border-radius: 5px; text-align: center; font-weight: bold; cursor: pointer; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>CINEMA COMPANY</h1>
+    <div class="dev-tag">Developed by Aflah</div>
+</header>
+
+<div class="search-container">
+    <input type="text" id="search" placeholder="Search for movies...">
+</div>
+
+<div class="grid" id="movie-grid"></div>
+
+<div id="movie-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">✕</span>
+        <img id="m-poster" class="modal-poster" src="" alt="Poster">
+        
+        <div class="info-box">
+            <h2 id="m-title"></h2>
+            <div class="rating">⭐ <span id="m-rating"></span>/10</div>
+            <div class="details">
+                <p><strong>Release Date:</strong> <span id="m-date"></span></p>
+                <p><strong>Director:</strong> <span id="m-director"></span></p>
+                <p><strong>Stars:</strong> <span id="m-stars"></span></p>
+                <p><strong>Overview:</strong> <span id="m-overview"></span></p>
+            </div>
+            <div class="btn-trailer" onclick="playTrailer()">WATCH TRAILER</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const API_KEY = '4046cb4810b46bf2de7f97e36b6e1cb4';
+    let currentMovieId = null;
+
+    async function getMovies(url) {
+        const res = await fetch(url);
+        const data = await res.json();
+        displayMovies(data.results);
+    }
+
+    async function getMovieDetails(movieId) {
+        const res = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${API_KEY}`);
+        const data = await res.json();
+        document.getElementById('m-director').innerText = data.crew.find(p => p.job === 'Director')?.name || 'Unknown';
+        document.getElementById('m-stars').innerText = data.cast.slice(0, 3).map(a => a.name).join(', ') || 'N/A';
+    }
+
+    function displayMovies(movies) {
+        const grid = document.getElementById('movie-grid');
+        grid.innerHTML = '';
+        movies.forEach(movie => {
+            if(!movie.poster_path) return;
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `<img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
+                              <div class="card-info">${movie.title}</div>`;
+            card.onclick = () => openModal(movie);
+            grid.appendChild(card);
+        });
+    }
+
+    function openModal(movie) {
+        currentMovieId = movie.id;
+        document.getElementById('m-title').innerText = movie.title;
+        document.getElementById('m-poster').src = `https://image.tmdb.org/t/p/w780${movie.poster_path}`;
+        document.getElementById('m-rating').innerText = movie.vote_average;
+        document.getElementById('m-overview').innerText = movie.overview;
+        document.getElementById('m-date').innerText = movie.release_date;
+        getMovieDetails(currentMovieId);
+        document.getElementById('movie-modal').style.display = 'block';
+    }
+
+    async function playTrailer() {
+        const res = await fetch(`https://api.themoviedb.org/3/movie/${currentMovieId}/videos?api_key=${API_KEY}`);
+        const data = await res.json();
+        const trailer = data.results.find(v => v.type === 'Trailer');
+        if (trailer) window.open(`https://www.youtube.com/watch?v=${trailer.key}`, '_blank');
+        else alert("Trailer not available!");
+    }
+
+    function closeModal() { document.getElementById('movie-modal').style.display = 'none'; }
+
+    document.getElementById('search').addEventListener('input', (e) => {
+        const term = e.target.value;
+        const url = term ? `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${term}` : `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`;
+        getMovies(url);
+    });
+
+    getMovies(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`);
+</script>
+</body>
+</html>
